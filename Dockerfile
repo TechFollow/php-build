@@ -7,7 +7,7 @@ RUN set -x && \
     apk add --virtual build_deps $BUILD_DEPS && \
     cp /usr/bin/envsubst /usr/local/bin/envsubst && \
     docker-php-ext-configure opcache --enable-opcache && \
-    docker-php-ext-configure exif && \
+    docker-php-ext-configure zip && \
     docker-php-ext-configure exif && \
     docker-php-ext-configure gd \
             --enable-gd \
