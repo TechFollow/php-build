@@ -6,11 +6,13 @@ RUN set -x && \
     apk add --update $RUNTIME_DEPS && \
     apk add --virtual build_deps $BUILD_DEPS && \
     cp /usr/bin/envsubst /usr/local/bin/envsubst && \
+    docker-php-ext-configure opcache --enable-opcache && \
+    docker-php-ext-configure exif && \
+    docker-php-ext-configure exif && \
     docker-php-ext-configure gd \
-            --with-gd \
-            --with-freetype-dir=/usr/include/ \
-            --with-png-dir=/usr/include/ \
-            --with-jpeg-dir=/usr/include/ && \
+            --enable-gd \
+            --with-freetype \
+            --with-jpeg && \
     docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd iconv pdo pdo_mysql && \
     pecl install apcu apcu_bc && docker-php-ext-enable apcu && \
     apk del build_deps
