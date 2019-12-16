@@ -1,4 +1,4 @@
-FROM php:7.2-fpm-alpine
+FROM php:7.4-fpm-alpine
 ENV BUILD_DEPS="freetype-dev libjpeg-turbo-dev libpng-dev php7-dev alpine-sdk gettext" \
     RUNTIME_DEPS="bash freetype libjpeg-turbo libpng libintl"
 
