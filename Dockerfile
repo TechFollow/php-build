@@ -1,6 +1,6 @@
 FROM php:7.4-fpm-alpine
-ENV BUILD_DEPS="freetype-dev libjpeg-turbo-dev libpng-dev php7-dev alpine-sdk gettext libzip-dev" \
-    RUNTIME_DEPS="bash freetype libjpeg-turbo libpng libintl libzip"
+ENV BUILD_DEPS="freetype-dev libjpeg-turbo-dev libpng-dev php7-dev alpine-sdk gettext libzip-dev postgresql-dev" \
+    RUNTIME_DEPS="bash freetype libjpeg-turbo libpng libintl libzip postgresql"
 
 RUN set -x && \
     apk add --update $RUNTIME_DEPS && \
@@ -9,11 +9,12 @@ RUN set -x && \
     docker-php-ext-configure opcache --enable-opcache && \
     docker-php-ext-configure zip && \
     docker-php-ext-configure exif && \
+    docker-php-ext-configure pgsql && \
     docker-php-ext-configure gd \
             --enable-gd \
             --with-freetype \
             --with-jpeg && \
-    docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd iconv pdo pdo_mysql && \
+    docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd iconv pdo pdo_mysql pdo_pgsql pgsql && \
     pecl install apcu apcu_bc && docker-php-ext-enable apcu && \
     apk del build_deps
 
