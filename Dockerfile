@@ -24,6 +24,5 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-
 RUN mv $PHP_INI_DIR/php.ini-development $PHP_INI_DIR/php.ini
 RUN echo 'apc.enable_cli = "On"' >> $PHP_INI_DIR/php.ini
