@@ -14,7 +14,7 @@ RUN set -x && \
             --enable-gd \
             --with-freetype \
             --with-jpeg && \
-    docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd iconv pdo pdo_mysql pdo_pgsql pgsql && \
+    docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) gd iconv pdo pdo_mysql pdo_pgsql pgsql zip opcache exif && \
     pecl install apcu apcu_bc && docker-php-ext-enable apcu && \
     apk del build_deps
 
